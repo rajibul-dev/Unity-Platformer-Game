@@ -16,6 +16,10 @@ public class Player : MonoBehaviour
     public bool canDoubleJump;
 
 
+    [Header("Buffer jump")]
+    [SerializeField] private float bufferJumpWindow = .25f;
+    public float bufferJumpActivated = -1;
+
     [Header("Wall interactions")]
     [SerializeField] private float wallJumpDuration = .6f;
     [SerializeField] private Vector2 wallJumpForce;
@@ -105,7 +109,10 @@ public class Player : MonoBehaviour
     {
         isAirborne = false;
         canDoubleJump = true;
+
+        AttemptBufferJump();
     }
+
     private void BecomeAirborne()
     {
         isAirborne = true;
@@ -117,8 +124,28 @@ public class Player : MonoBehaviour
         yInput = Input.GetAxisRaw("Vertical");
 
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             JumpButton();
+            RequestBufferJump();
+        }
     }
+
+
+    private void RequestBufferJump()
+    {
+        if (isAirborne)
+            bufferJumpActivated = Time.time;
+    }
+
+    private void AttemptBufferJump()
+    {
+        if (Time.time < bufferJumpActivated + bufferJumpWindow)
+        {
+            bufferJumpActivated = 0;
+            Jump();
+        }
+    }
+
 
     private void JumpButton()
     {
