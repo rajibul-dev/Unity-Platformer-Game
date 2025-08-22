@@ -8,9 +8,9 @@ This is a Udemy course project which I'm using to learn Game Development! I can 
 
 ### Roadmap
 
-[] Course ongoing
-[] Game built and deployed (will provide link of the game when done and shipped)
-[] Adding my own touch to the game
+- [ ] Course ongoing
+- [ ] Game built and deployed (will provide link of the game when done and shipped)
+- [ ] Adding my own touch to the game
 
 ## Expectations
 
